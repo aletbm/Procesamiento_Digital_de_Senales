@@ -63,7 +63,7 @@ max_ = []
 tus_resultados = []
 
 ventanas = {1:sg.windows.boxcar, 2:w_Bartlett, 3:w_Hann, 4:w_Blackman, 5:sg.flattop}
-w_name = {1:'Rectagular', 2:'Bartlett', 3:'Hann', 4:'Blackman', 5:'Flattop'}
+w_name = {1:'Rectagular', 2:'Bartlett', 3:'Hann', 4:'Blackman', 5:'Flat-top'}
 
 for i in range(1, 6):
 
@@ -76,7 +76,7 @@ for i in range(1, 6):
     
     fftx_db = 20*np.log10(np.abs(fftx[0:ff.size]))
     
-    plt.figure(i, figsize=(10, 7), dpi=100)
+    plt.figure(i, figsize=(15, 7), dpi=100)
     plt.title(f'Ventana {w_name[i]}')
     plt.plot(ff, fftx_db)
     
@@ -94,15 +94,16 @@ for i in range(1, 6):
     plt.xlabel("Frecuencia Digital ($\Omega$)")
     plt.legend(loc='upper right', shadow=True, fontsize='small')
     
-    plt.figure(6, figsize=(10, 7), dpi=100)
-    plt.plot(ff, fftx_db, ':')
-    plt.scatter(ff[min_[i-1]], fftx_db[min_[i-1]], color='green', label = f"$\Omega_0$:{round(ff[min_[i-1]],4)} -> |W({round(ff[min_[i-1]],4)})| = {round(fftx_db[min_[i-1]],2)}dB")
-    plt.scatter(ff[fftx_db == p_3db][0], p_3db, color='y', label = f"$\Omega_1$:{round(ff[fftx_db == p_3db][0],4)} -> |W({round(ff[fftx_db == p_3db][0],4)})| = {round(p_3db,2)}dB")
-    plt.scatter(ff[max_[i-1]], fftx_db[max_[i-1]], color='r', label = f"$W_2$:{round(ff[max_[i-1]],4)} -> |W({round(ff[max_[i-1]],4)})| = {round(fftx_db[max_[i-1]],2)}dB")
+    plt.figure(6, figsize=(15, 7), dpi=100)
+    plt.plot(ff, fftx_db, ':', label = f"{w_name[i]}")
+    plt.scatter(ff[min_[i-1]], fftx_db[min_[i-1]], color='green')
+    plt.scatter(ff[fftx_db == p_3db][0], p_3db, color='y')
+    plt.scatter(ff[max_[i-1]], fftx_db[max_[i-1]], color='r')
 
     plt.xlim(0,2)
     plt.xlabel("Frecuencia Digital ($\Omega$)")
-    plt.legend(loc='upper right', shadow=True, fontsize='small')    
+    plt.legend(loc='upper right', shadow=True, fontsize='small')
+    
     tus_resultados.append([f'{round(ff[min_[i-1]],4)}', f'{round(ff[max_[i-1]],4)}', f'{ff[fftx_db == p_3db][0]}'])
     
 
