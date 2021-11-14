@@ -104,7 +104,7 @@ for i in range(1, 6):
     plt.xlabel("Frecuencia Digital ($\Omega$)")
     plt.legend(loc='upper right', shadow=True, fontsize='small')
     
-    tus_resultados.append([f'{round(ff[min_[i-1]],4)}', f'{round(ff[max_[i-1]],4)}', f'{ff[fftx_db == p_3db][0]}'])
+    tus_resultados.append([f'{round(ff[min_[i-1]],4)}', f'{round(ff[max_[i-1]],4)}', f'{round(fftx_db[max_[i-1]],2)}'])
     
 
 df = DataFrame(tus_resultados, columns=['$\Omega_0$', '$\Omega_1$', '$W_2$' ],
