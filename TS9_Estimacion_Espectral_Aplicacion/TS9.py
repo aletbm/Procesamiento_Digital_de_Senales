@@ -99,4 +99,13 @@ plt.xlabel("Frecuencia(Hz)")
 plt.ylabel("Amplitud(dB)")
 plt.legend()
 
+#Tomamos las primeras 50 latidos ya que son los mas limpios
+acumulador = 0
+for x in range(50):
+    acumulador += np.where(cum_area_all[:,x] >=0.99)[0][0]
+    
+ind_f = acumulador//50
+
+print('fp0 = 1 Hz debido a la frecuencia de muestreo')
+print('fp1 = ',f_welch[ind_f], 'pero por seguridad tomaremos 35 Hz')
 
